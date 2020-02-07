@@ -1,0 +1,640 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第2节 Functor的更多例子 Functors · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="section03.html" />
+    
+    
+    <link rel="prev" href="section01.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../cover.html">
+            
+                <a href="../../cover.html">
+            
+                    
+                    封面
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../theory.html">
+            
+                <a href="../theory.html">
+            
+                    
+                    第1部分
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter01.html">
+            
+                <a href="../chapter01.html">
+            
+                    
+                    第1章 介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../chapter01/section01.html">
+            
+                <a href="../chapter01/section01.html">
+            
+                    
+                    第1节 类型类的结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../chapter01/section02.html">
+            
+                <a href="../chapter01/section02.html">
+            
+                    
+                    第2节 与隐式转换一起工作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../chapter01/section03.html">
+            
+                <a href="../chapter01/section03.html">
+            
+                    
+                    第3节 练习：可打印库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.4" data-path="../chapter01/section04.html">
+            
+                <a href="../chapter01/section04.html">
+            
+                    
+                    第4节 遇见Cats
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.5" data-path="../chapter01/section05.html">
+            
+                <a href="../chapter01/section05.html">
+            
+                    
+                    第5节 例子：Eq
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.6" data-path="../chapter01/section06.html">
+            
+                <a href="../chapter01/section06.html">
+            
+                    
+                    第6节 控制实例选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.7" data-path="../chapter01/section07.html">
+            
+                <a href="../chapter01/section07.html">
+            
+                    
+                    第7节 小结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter02.html">
+            
+                <a href="../chapter02.html">
+            
+                    
+                    第2章 Monoids和Semigroups
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../chapter02/section01.html">
+            
+                <a href="../chapter02/section01.html">
+            
+                    
+                    第1节 Monoid的定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.2" data-path="../chapter02/section02.html">
+            
+                <a href="../chapter02/section02.html">
+            
+                    
+                    第2节 Semigroup的定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.3" data-path="../chapter02/section03.html">
+            
+                <a href="../chapter02/section03.html">
+            
+                    
+                    第3节 练习：Monoids的真相
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.4" data-path="../chapter02/section04.html">
+            
+                <a href="../chapter02/section04.html">
+            
+                    
+                    第4节 练习：集合的Monoid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.5" data-path="../chapter02/section05.html">
+            
+                <a href="../chapter02/section05.html">
+            
+                    
+                    第5节 Cats中的Monoids
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.6" data-path="../chapter02/section06.html">
+            
+                <a href="../chapter02/section06.html">
+            
+                    
+                    第6节 Monoid的应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2.7" data-path="../chapter02/section07.html">
+            
+                <a href="../chapter02/section07.html">
+            
+                    
+                    第7节 小结
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../chapter03.html">
+            
+                <a href="../chapter03.html">
+            
+                    
+                    第3章 Functors
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="section01.html">
+            
+                <a href="section01.html">
+            
+                    
+                    第1节 Functor的例子 Functors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3.2" data-path="section02.html">
+            
+                <a href="section02.html">
+            
+                    
+                    第2节 Functor的更多例子 Functors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="section03.html">
+            
+                <a href="section03.html">
+            
+                    
+                    第3节 Functor的定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="section04.html">
+            
+                <a href="section04.html">
+            
+                    
+                    第4节 高级类型和类型构造器
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >第2节 Functor的更多例子 Functors</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="32-functor&#x7684;&#x66F4;&#x591A;&#x4F8B;&#x5B50;">3.2 Functor&#x7684;&#x66F4;&#x591A;&#x4F8B;&#x5B50;</h2>
+<p><strong>List</strong>&#xFF0C;<strong>Option</strong>&#xFF0C;&#x548C; <strong>Either</strong> &#x7684;map&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x4E86;&#x5E8F;&#x5217;&#x529F;&#x80FD;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5E8F;&#x5217;&#x8BA1;&#x7B97;&#x7684;&#x601D;&#x60F3;&#x4E0E;&#x6B64;&#x76F8;&#x6BD4;&#x66F4;&#x52A0;&#x901A;&#x7528;&#x3002;&#x8BA9;&#x6211;&#x4EEC;&#x6DF1;&#x5165;&#x7814;&#x7A76;&#x5176;&#x4ED6;&#x4EE5;&#x4E0D;&#x540C;&#x65B9;&#x5F0F;&#x5E94;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x6A21;&#x5F0F;&#x7684; <strong>functor</strong> &#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<h4 id="futures">Futures</h4>
+<p><strong>Future</strong> &#x662F;&#x4E00;&#x79CD; <strong>functor</strong>&#xFF0C;&#x5176;&#x901A;&#x8FC7;&#x6392;&#x5E8F;&#x5E76;&#x5728;&#x524D;&#x7F6E;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x6309;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x5F02;&#x6B65;&#x8BA1;&#x7B97;&#x3002;&#x5B83;&#x7684;map&#x65B9;&#x6CD5;&#x7684;&#x7C7B;&#x578B;&#x7B7E;&#x540D;&#x5728;&#x56FE;3.2&#x4E2D;&#xFF0C;&#x548C;&#x4E0A;&#x9762;&#x7684;&#x7B7E;&#x540D;&#x4E00;&#x6837;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5176;&#x884C;&#x4E3A;&#x5374;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x3002;</p>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <strong>Future</strong> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x786E;&#x4FDD;&#x5176;&#x5185;&#x90E8;&#x7684;&#x72B6;&#x6001;&#x3002;&#x88AB;&#x5C01;&#x88C5;&#x7684;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x53EF;&#x80FD;&#x662F;&#x6B63;&#x5728;&#x8BA1;&#x7B97;&#x5F53;&#x4E2D;&#xFF0C;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x88AB;&#x62D2;&#x7EDD;&#x8FD9;&#x4E09;&#x79CD;&#x72B6;&#x6001;&#x4E4B;&#x4E00;&#x3002;&#x5982;&#x679C; <strong>Future</strong> &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#xFF0C;&#x90A3;&#x4E48;map&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x7ACB;&#x5373;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x67D0;&#x4E9B;&#x4E0B;&#x5C42;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x5C06;&#x4F1A;&#x5C06;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x540E;&#x9762;&#x8FD4;&#x56DE;&#x8C03;&#x7528;&#x3002;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x77E5;&#x9053;&#x6211;&#x4EEC;&#x7684;&#x51FD;&#x6570;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x4ED6;&#x4EEC;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x987A;&#x5E8F;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;<strong>Future</strong> &#x63D0;&#x4F9B;&#x4E86;&#x548C;List&#xFF0C;Option&#x548C;Either&#x76F8;&#x540C;&#x7684;&#x5E8F;&#x5217;&#x884C;&#x4E3A;&#xFF1A;</p>
+<p><code>import scala.concurrent.{Future, Await}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
+val future: Future[String] = Future(123).
+map(n =&gt; n + 1). map(n =&gt; n * 2). map(n =&gt; n + &quot;!&quot;)
+Await.result(future, 1.second)</code></p>
+<blockquote>
+<h4 id="future-&#x548C;&#x5F15;&#x7528;&#x900F;&#x660E;">Future &#x548C;&#x5F15;&#x7528;&#x900F;&#x660E;</h4>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;Scala&#x7684;Future&#x5E76;&#x975E;&#x4E00;&#x4E2A;&#x7EAF;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x7684;&#x597D;&#x4F8B;&#x5B50;&#xFF0C;&#x56E0;&#x4E3A;&#x4ED6;&#x4EEC;&#x5E76;&#x975E;&#x5F15;&#x7528;&#x900F;&#x660E;&#x3002;Future&#x4F1A;&#x8BA1;&#x7B97;&#x5E76;&#x4E14;&#x7F13;&#x5B58;&#x7ED3;&#x679C;&#xFF0C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x4E00;&#x7AA5;&#x5176;&#x884C;&#x4E3A;&#x3002;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;Future&#x6765;&#x5305;&#x542B;&#x526F;&#x4F5C;&#x7528;&#x8BA1;&#x7B97;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x65E0;&#x6CD5;&#x9884;&#x6D4B;&#x5230;&#x7ED3;&#x679C;&#x3002;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<p><code>import scala.util.Random
+val future1 = {
+  // Initialize Random with a fixed seed:
+  val r = new Random(0L)
+// nextInt has the side-effect of moving to // the next random number in the sequence:
+  val x =  Future(r.nextInt)
+  for {
+    a &lt;- x
+    b &lt;- x
+    } yield (a, b)
+}
+  val future2 = {
+  val r = new Random(0L)
+  for {
+    a &lt;- Future(r.nextInt) b &lt;- Future(r.nextInt)
+    } yield (a, b)
+  }
+val result1 = Await.result(future1, 1.second)
+// result1: (Int, Int) = (-1155484576,-1155484576)
+val result2 = Await.result(future2, 1.second)
+// result2: (Int, Int) = (-1155484576,-723955400)</code></p>
+<p>&#x7406;&#x60F3;&#x72B6;&#x51B5;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x4EE5;&#x4E3A;result1&#x548C;result2&#x5305;&#x542B;&#x76F8;&#x540C;&#x7684;&#x503C;&#x3002;&#x7136;&#x800C;&#xFF0C;future1&#x76F4;&#x8C03;&#x7528;&#x4E86;nextInt 1&#x6B21;&#xFF0C;&#x800C;future2&#x8C03;&#x7528;&#x4E86;2&#x6B21;&#x3002;&#x56E0;&#x4E3A;nextInt&#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x8FD4;&#x56DE;&#x4E0D;&#x540C;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x8FD9;&#x6BCF;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#x6211;&#x4EEC;&#x90FD;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x7ED3;&#x679C;&#x3002;
+&#x8FD9;&#x79CD;&#x5DEE;&#x5F02;&#x6027;&#x662F;&#x7A0B;&#x5E8F;&#x5F88;&#x96BE;&#x89E3;&#x51B3;Future&#x548C;&#x526F;&#x4F5C;&#x7528;&#x7684;&#x539F;&#x56E0;&#x3002;&#x5F53;&#x7136;&#x8FD8;&#x6709;Future&#x884C;&#x4E3A;&#x7684;&#x5176;&#x4ED6;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;Future&#x603B;&#x662F;&#x7ACB;&#x5373;&#x5F00;&#x542F;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x5019;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x51B3;&#x5B9A;&#x3002;&#x66F4;&#x591A;&#x7684;&#x4FE1;&#x606F;&#x8BF7;&#x53C2;&#x8003;&#x4F18;&#x79C0;&#x7684;Reddit
+<img src="../../images/fig3-3.png" alt="fig3-3"></p>
+<p><center>&#x56FE;3.3 &#x7C7B;&#x578B;&#x56FE;&#xFF1A; mapping over a Function1</center>
+&#x56DE;&#x7B54;&#x4F5C;&#x8005;Rob Norris&#x3002;</p>
+</blockquote>
+<p>&#x5982;&#x679C;Future&#x4E0D;&#x662F;&#x5F15;&#x7528;&#x900F;&#x660E;&#x7684;&#xFF0C;&#x4E5F;&#x8BB8;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7814;&#x7A76;&#x4E00;&#x4E0B;&#x5176;&#x4ED6;&#x7C7B;&#x4F3C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;&#x4F60;&#x53EF;&#x80FD;&#x8BA4;&#x8BC6;&#x8FD9;&#x4E2A;...</p>
+<h4 id="functions-">Functions (?!)</h4>
+<p>&#x5355;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#x4E5F;&#x662F; <strong>functor</strong>&#x3002;&#x4E3A;&#x4E86;&#x7406;&#x89E3;&#x65B9;&#x4FBF;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x7A0D;&#x505A;&#x4E00;&#x70B9;&#x8C03;&#x6574;&#x3002;&#x4E00;&#x4E2A;&#x51FD;&#x6570; A =&gt; B &#x6709;&#x4E24;&#x4E2A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#xFF1A;&#x53C2;&#x6570;&#x7C7B;&#x578B;A&#x548C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;B&#x3002;&#x4E3A;&#x4E86;&#x4F7F;&#x5F97;&#x4ED6;&#x4EEC;&#x7B26;&#x5408;&#x8FD9;&#x4E2A;&#x89C4;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4FEE;&#x590D;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x8BA9;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x4E0D;&#x540C;&#xFF1A;</p>
+<ul>
+<li>&#x4EE5;X=&gt;A&#x4E3A;&#x5F00;&#x59CB;&#xFF1B;</li>
+<li>&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;A=&gt;B&#x51FD;&#x6570;&#xFF1B;</li>
+<li>&#x83B7;&#x5F97;&#x8FD4;&#x56DE;X=&gt;B&#x3002;</li>
+</ul>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7ED9;X =&gt; A&#x53D6;&#x4E2A;&#x522B;&#x540D;&#x4E3A;MyFunc[A]&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x548C;&#x672C;&#x7AE0;&#x8282;&#x5176;&#x4ED6;&#x4F8B;&#x5B50;&#x91CC;&#x9762;&#x6240;&#x770B;&#x5230;&#x7684;&#x7C7B;&#x578B;&#x6A21;&#x5F0F;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x56FE;3.3&#x4E2D;&#x770B;&#x5230;&#xFF1A;</p>
+<ul>
+<li>&#x4EE5;MyFunc[A]&#x5F00;&#x59CB;;</li>
+<li>&#x63D0;&#x4F9B;A=&gt;B&#x51FD;&#x6570;;</li>
+<li>&#x83B7;&#x5F97;&#x8FD4;&#x56DE;MyFunc[B].</li>
+</ul>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;Function1&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7EC4;&#x5408;&#xFF1A;</p>
+<p><code>import cats.instances.function._ // for Functor import cats.syntax.functor._ // for map
+val func1: Int =&gt; Double = (x: Int) =&gt; x.toDouble
+val func2: Double =&gt; Double =
+  (y: Double) =&gt; y * 2
+(func1 map func2)(1) // composition using map // res7: Double = 2.0
+(func1 andThen func2)(1) // composition using andThen // res8: Double = 2.0
+func2(func1(1)) // composition written out by hand // res9: Double = 2.0</code></p>
+<p>&#x8FD9;&#x4E0E;&#x5E8F;&#x5217;&#x64CD;&#x4F5C;&#x7684;&#x901A;&#x7528;&#x6A21;&#x5F0F;&#x53C8;&#x6709;&#x4F55;&#x5173;&#x7CFB;&#xFF1F;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8003;&#x8651;&#x5230;&#x51FD;&#x6570;&#x7EC4;&#x5408;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5E8F;&#x5217;&#x3002;&#x6BCF;&#x6B21;&#x4EE5;&#x6267;&#x884C;&#x5355;&#x4E2A;&#x64CD;&#x4F5C;&#x6765;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;map&#x6765;&#x5C06;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x8FFD;&#x52A0;&#x5230;&#x94FE;&#x6761;&#x540E;&#x9762;&#x3002;&#x8C03;&#x7528;map&#x5E76;&#x4E0D;&#x4F1A;&#x6709;&#x5B9E;&#x9645;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x5C06;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x5230;&#x8FD9;&#x4E2A;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x7684;&#x8FD0;&#x884C;&#x7684;&#x5E8F;&#x5217;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x5F53;&#x4F5C;&#x548C;Future&#x7684;&#x61D2;&#x5E8F;&#x5217;&#x64CD;&#x4F5C;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<p><code>val func =
+((x: Int) =&gt; x.toDouble).
+map(x =&gt; x + 1). map(x =&gt; x * 2). map(x =&gt; x + &quot;!&quot;)
+func(123)
+// res10: String = 248.0!</code></p>
+<blockquote>
+<p>&#x90E8;&#x5206;&#x7EDF;&#x4E00;</p>
+<p>&#x4E3A;&#x4E86;&#x8BA9;&#x4E0A;&#x8FF0;&#x7684;&#x4F8B;&#x5B50;&#x53EF;&#x4EE5;&#x5DE5;&#x4F5C;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7ED9;&#x7F16;&#x8BD1;&#x5668;&#x589E;&#x52A0;&#x9009;&#x9879;&#xFF0C;&#x7ED9;build.sbt&#x589E;&#x52A0;&#xFF1A;</p>
+</blockquote>
+<p><code>scalacOptions += &quot;-Ypartial-unification&quot;</code></p>
+<blockquote>
+<p>&#x5426;&#x5219;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x51FA;&#x9519;&#xFF1A;</p>
+<p><img src="../../images/fig3-4.png" alt="fig3-4"></p>
+<center>&#x56FE;3.4:&#x7C7B;&#x578B;&#x56FE;&#xFF0C;&#x901A;&#x7528;functor map</center>
+
+<p><code>func1.map(func2)
+// &lt;console&gt;: error: value map is not a member of Int =&gt; Double // func1.map(func2)</code></p>
+<p>&#x6211;&#x4EEC;&#x4F1A;&#x5728;&#x7B2C;3.8&#x8282;&#x770B;&#x5230;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x3002;</p>
+</blockquote>
+<p>#</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="section01.html" class="navigation navigation-prev " aria-label="Previous page: 第1节 Functor的例子 Functors">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="section03.html" class="navigation navigation-next " aria-label="Next page: 第3节 Functor的定义">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第2节 Functor的更多例子 Functors","level":"1.3.3.2","depth":3,"next":{"title":"第3节 Functor的定义","level":"1.3.3.3","depth":3,"path":"part01/chapter03/section03.md","ref":"part01/chapter03/section03.md","articles":[]},"previous":{"title":"第1节 Functor的例子 Functors","level":"1.3.3.1","depth":3,"path":"part01/chapter03/section01.md","ref":"part01/chapter03/section01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part01/chapter03/section02.md","mtime":"2020-02-06T14:22:46.883Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-07T06:30:14.882Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
