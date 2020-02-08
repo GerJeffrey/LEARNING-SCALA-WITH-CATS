@@ -1,85 +1,78 @@
-## 2.5 Cats中的Monoids
+## 3.5 Cats中的Functor
 
-现在，我们已经了解了什么是 **Monoid** 了, 我们再来看看他们如何再Cats中实现的。我们再次回顾一下实现的三个方面：类型类，实例和接口。
+让我们学习一下Cats中的 **functor** 的实现。我们会像学习monoid一样学习到三个方面：类型类，实例和syntax
 
-### 2.5.1 Monoid类型类
+### 3.5.1 Functor 类型类
 
+**functor** 的类型类是 cats.Functor 。我们通过标准的伴生对象里面的 Functor.apply 获得实例。通常，默认的实例被安排在 cats.instances包内：
 
-cats.kernel.Monoid是 **monoid** 的类型类，可以使用别名cats.Monoid。 **Monoid** 扩展了 cats.kernel.Semigroup, 别名是 cats.Semigroup。当我们要使用 **monoid** 类型类的时候，可以导入这些包：
+`import scala.language.higherKinds
+import cats.Functor
+import cats.instances.list._
+import cats.instances.option._
 
- `import cats.Monoid
- import cats.Semigroup`
+val list1 = List(1,2,3)
+val list2 = Functor[List].map(list1)(_ * 2)
+val option1 = Option(123)
+val option2 = Functor[Option].map(option1)(_.toString)`
 
-> #### Cats Kernel?
+**Functor** 也提供 **lift** 函数，其将一个类型为A=>B的函数提升为类型为F[A] => F[B]:
 
-> Cats Kernel是Cats的一个子项目，其提供了一小组不需要整个cats工具箱的库的类型类。这些核心类型类被技术性的定义在 **cats.kernel** 包内，其别名就是 **cats**，因此我们也很少能意识到这些区别。
+`val func = (x:Int) => x +1
+val liftedFunc = Functor[Option].lift(func)
+liftedFunc(Option(1))`
 
->  Cats Kernel 类型类覆盖了本书的 **Eq**, **Semigroup**, 以及 **Monoid** 。本书的涉及到的其他类型类都直接被定义在 **cats** 包内。
+### 3.5.2 Functor syntax
 
-### 2.5.2 Monoid实例
+Functor syntax提供的最主要的方法就是map。使用Options和Lists来演示这个函数比较困难，因为scala都给他们内建了map函数。我们用两个例子来说明。
 
-**Monoid** 的用户接口遵从了标准的 Cats模式：即伴生对象有一个apply方法可以返回特定类型类实例。举个例子，如果我们想要一个String的 **Monoid** 实例，先修正隐式转换的域，我们可以这样来写：
+第一，我们先来看一边函数。Scala的Function1类型没有map方法(有一个andThen方法)，因为就没有map方法的冲突问题：
 
-`import cats.Monoid
-import cats.instances.string._ // for Monoid
-Monoid[String].combine("Hi ", "there") // res0: String = Hi there
-Monoid[String].empty`
+`import cats.instances.function._
+import cats.syntax.functor._
 
-其相当于：
+val func1 = (a: Int) => a + 1
+val func2 = (a: Int) => a * 2
+val func3 = (a: Int) => a + "!"
+val func4 = func1.map(func2).map(func3)
+func4(123)`
 
-`Monoid.apply[String].combine("Hi ", "there") // res2: String = Hi there
-Monoid.apply[String].empty
-// res3: String = ""`
+我们再来看另外一个例子。这次我们会将functor进行抽象，因为我们不会看到任何实体类型。我们可以写一个方法实现无论functor的上下文是什么的等式：
 
-我们知道 **Monoid** 扩展自 **Semigroup**。如果我们不需要 **empty** ，我们相当于这样写：
+`def doMath[F[_]](start:F[Int])
+ (implicit functor:Functor[F]):F[Int] = start.map(n => n + 1 * 2)
 
-`import cats.Semigroup
-Semigroup[String].combine("Hi ", "there") // res4: String = Hi there`
+ import cats.instances.option._
+ import cats.instances.list._
 
-在第一章中，我们已经了解到 **Monoid** 的实例的标准组织方式了。举个例子，我们想要 **Int** 的实例，那么我们导入 **cats.instances.int** 即可:
+ doMath(Option(20))
+ doMath(List(1,2,3))
 
-`import cats.Monoid
-import cats.instances.int._ // for Monoid
-Monoid[Int].combine(32, 10)`
+ import cats.instances.option._
+ import cats.instances.list._
 
-类似的，我们可以通过 **cats.instances.int** 和 **cats.instances.option** 组合出=Monoid[Option[Int]]:
+ doMath(Option(20))
+ doMath(List(1,2,3))`
 
-`import cats.Monoid
-import cats.instances.int._ // for Monoid import cats.instances.option._ // for Monoid
-val a = Option(22)
-// a: Option[Int] = Some(22)
-val b = Option(20)
-// b: Option[Int] = Some(20)
-Monoid[Option[Int]].combine(a, b)
-// res6: Option[Int] = Some(42)`
+ 为了演示这一点如何工作，我们需要看一下cats.syntax.functor中map的定义。这里的代码简单的代码版本：
 
-参考第1章，可以对这些导入加深理解。
+  `implicit class FunctorOps[F[_], A](src: F[A]){
+    def map[B](func: A => B)(implicit functor:Functor[F]):F[B] = {
+      functor.map(src)(func)
+    }
+  }`
 
-### 2.5.3 Monoid Syntax
+编译器不论有没有内建map都会插入一个map方法:
 
-Cats以 **|+|** 操作符为 **combine** 方法提供 **syntax** 支持。因为从技术溯源来讲，**combine** 来自于 **Semigroup** ，因此，我们通过导入 **cats.syntax.semigroup** 来获取 **syntax** 支持：
+`foo.map(value => value + 1)`
 
-`import cats.instances.string._ // for Monoid import cats.syntax.semigroup._ // for |+|
-val stringResult = "Hi " |+| "there" |+| Monoid[String].empty // stringResult: String = Hi there
-import cats.instances.int._ // for Monoid val intResult = 1 |+| 2 |+| Monoid[Int].empty
-// intResult: Int = 3`
+FunctorOps的map方法需要一个隐式的Functor作为参数。这就意味着只有F的Functor在作用域内才能编译。如果没有，就会出现编译错误：
 
-### 2.5.4 练习：综合这一切
+ `final case class Box[A](value: A)
+ val box = Box[Int](123)
+ box.map(value => value + 1)`
 
-SuperAdder v3.5a-32是世界上第一个选择加和在一起的数字。 main函数中有def add(items: List[Int]): Int的签名。在一次意外中，这些代码被删除了。需要重写这个方法并保存起来。
-
-#### B.3 综合这一切
-
-我们可以用0和+将加和写为一个简单的foldLeft：
-
-` def add(items: List[Int]): Int = items.foldLeft(0)(_ + _)`
-
-尽管没有人强制我们这么做，我们同样可以用 **Monoid** 来重写这个fold：
-
-`import cats.Monoid
-import cats.instances.int._ // for Monoid import cats.syntax.semigroup._ // for |+|
-def add(items: List[Int]): Int = items.foldLeft(Monoid[Int].empty)(_ |+| _)`
-
+### 3.5.3 自定义类型实例
 
 
 

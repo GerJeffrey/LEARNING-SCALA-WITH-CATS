@@ -24,3 +24,4 @@
         * [第2节 Functor的更多例子 Functors](part01/chapter03/section02.md)
         * [第3节 Functor的定义](part01/chapter03/section03.md)
         * [第4节 高级类型和类型构造器](part01/chapter03/section04.md)
+        * [第5节 Cats中的Functor](part01/chapter03/section05.md)
