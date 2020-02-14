@@ -74,6 +74,78 @@ FunctorOps的map方法需要一个隐式的Functor作为参数。这就意味着
 
 ### 3.5.3 自定义类型实例
 
+我可以简单的通过定义其map方法来定一个一个 **functor** 。尽管cats.instances中有这么个实例，这里我们还是举一个Option的Functor例子。这个实现虽然看起来比较琐碎，我们只是简单的对Option的map调用了而已：
+
+`implicit val optionFunctor: Functor[Option] =
+new Functor[Option] {
+    def map[A](value: Option[A])(func:A => B):Option[B] = value.map(func)
+  }`
+
+有时候，我们需要给我们的实例注入依赖，举个自理，如果我们不得不为Future自定义一个Functor，我们需要考虑future.map参数里面的隐式转换ExcecutionContxt参数。我们不能给 **functor.map** 增加额外参数，因此我们不得不考虑在创建实例的时候注入依赖：
+
+`import scala.concurrent.{Future, ExecutionContext}
+
+implicit def futureFunctor
+(implicit ec: ExecutionContext):Functor[Future] =
+
+new Functor[Future]{
+  def map[A, B](value:Future[A])(func: A => B):Future[B] = value.map(func)
+}
+`
+
+当我们调用Future的Functor，或者直接使用Functor.apply，或者通过map的扩展方法，编译器将会在调用栈点通过隐式解析和递归搜索一个ExucutionContext作为定位到的隐式值。这个过程扩展起来看起来就像：
+
+`//我们这样来写
+Functor[Future]
+
+//The compiler expands to this first:
+
+Functor[Future](futureFunctor)
+
+//然后就是
+Functor[Future](futurFunctor(executionContext))`
+
+### 3.5.4 练习：使用Functor来拓展
+
+为下面的二叉树类型写一个Functor。可以核实Branch和Leaf的实例与预想的工作一致：
+
+`sealed trait Tree[+A]
+
+final case class Branch[A](left:Tree[A],right:Tree[A]) extends Tree[A]
+
+final case class leaf[A](value:A) extends Tree[A]`
+
+语法与写一个List的Functor类型。我们先递归数据结构，应用到每一个我们找到Leaf。functor的规则从直觉上需要我们对Branch和Leaf的节点保持相同的模式和结构：
+
+`import cats.Functors
+implicit val treeFunctor:Functor[Tree]=
+  new Functor[Tree]{
+    def map[A, B](tree:Tree[A])(func:A=>B):Tree[B] =
+      tree match{
+        case Branch(left,right) =>
+          Branch(map(left)(func),map(right)(func))
+        case Leaf(value) => Leaf(func(value))
+      }
+    }
+
+    Branch(Leaf(10),Leaf(20).map(_ * 2))`
+
+  上面的代码会编译出错，其原因在于我们在1.6.1中讨论的不变性问题。编译器能够找到Tree的一个Functor，但是却不能找到Branch和Leaf的Functor。我们加上只能构造器来补充：
+
+  `object Tree{
+    def branch[A](left:Tree[A],right:Tree[A]):Tree[A] = Branch(left,right)
+    }
+    def leaf[A](value:A):Tree[A]=Left(value)
+    }`
+
+  现在我们就可以正确的使用Functor了：
+
+  `Tree.leaf(100).map( _ * 2)
+
+  Tree.branch(Tree.leaf(10),Tree.leaf(20)).map(_ * 2)`
+
+
+
 
 
 

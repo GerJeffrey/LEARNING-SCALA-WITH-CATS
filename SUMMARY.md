@@ -25,3 +25,21 @@
         * [第3节 Functor的定义](part01/chapter03/section03.md)
         * [第4节 高级类型和类型构造器](part01/chapter03/section04.md)
         * [第5节 Cats中的Functor](part01/chapter03/section05.md)
+        * [第5节 逆变和不变Functor](part01/chapter03/section06.md)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #
