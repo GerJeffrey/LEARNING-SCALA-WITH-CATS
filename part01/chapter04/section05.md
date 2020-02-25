@@ -111,7 +111,7 @@ Functor[Future](futurFunctor(executionContext))`
 
 `sealed trait Tree[+A]
 
-final case class Branch[A](left:Tree[A],rigvadtfht:Tree[A]) extends Tree[A]
+final case class Branch[A](left:Tree[A],right:Tree[A]) extends Tree[A]
 
 final case class leaf[A](value:A) extends Tree[A]`
 
