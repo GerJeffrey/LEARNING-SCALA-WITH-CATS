@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>第1节 类型类的结构 · GitBook</title>
+        <title>第3节 练习：可打印库 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="section02.html" />
+    <link rel="next" href="section04.html" />
     
     
-    <link rel="prev" href="../chapter01.html" />
+    <link rel="prev" href="section02.html" />
     
 
     </head>
@@ -143,7 +143,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1.1" data-path="section01.html">
+        <li class="chapter " data-level="1.3.1.1" data-path="section01.html">
             
                 <a href="section01.html">
             
@@ -169,7 +169,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.1.3" data-path="section03.html">
+        <li class="chapter active" data-level="1.3.1.3" data-path="section03.html">
             
                 <a href="section03.html">
             
@@ -682,7 +682,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >第1节 类型类的结构</a>
+        <a href="../.." >第3节 练习：可打印库</a>
     </h1>
 </div>
 
@@ -697,71 +697,37 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="11&#x3001;&#x7C7B;&#x578B;&#x7C7B;&#x7684;&#x7ED3;&#x6784;">1.1&#x3001;&#x7C7B;&#x578B;&#x7C7B;&#x7684;&#x7ED3;&#x6784;</h2>
-<p>&#x7C7B;&#x578B;&#x7C7B;&#x6A21;&#x5F0F;&#x4E2D;&#x6709;&#x4E09;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x7EC4;&#x4EF6;&#xFF1A;<strong><em>&#x7C7B;&#x578B;&#x7C7B;&#x81EA;&#x8EAB;</em></strong>&#xFF0C;<strong><em>&#x7279;&#x6B8A;&#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x4F8B;</em></strong>&#xFF0C;&#x4EE5;&#x53CA;&#x6211;&#x4EEC;&#x66B4;&#x9732;&#x7ED9;&#x7528;&#x6237;&#x7684; <strong><em>&#x63A5;&#x53E3;&#x65B9;&#x6CD5;</em></strong>&#x3002;</p>
-<h3 id="111&#x3001;&#x7C7B;&#x578B;&#x7C7B;">1.1.1&#x3001;&#x7C7B;&#x578B;&#x7C7B;</h3>
-<p>&#x7C7B;&#x578B;&#x7C7B;&#x662F;&#x4E00;&#x4E2A;&#x627F;&#x8F7D;&#x67D0;&#x9879;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x5B9E;&#x73B0;&#x7684;&#x529F;&#x80FD;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6216;&#x8005;API&#x3002;&#x5728;Cats&#x4E2D;&#xFF0C;&#x7C7B;&#x578B;&#x7C7B;&#x901A;&#x8FC7;&#x81F3;&#x5C11;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7279;&#x5F81;&#xFF08;Trait&#xFF09;&#x6765;&#x8868;&#x793A;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x901A;&#x7528;&#x76EE;&#x7684;&#x7684;&#x201C;JSON&#x5E8F;&#x5217;&#x5316;&#x201D;&#xFF1A;</p>
-<p><code>// Define a very simple JSON AST
-sealed trait Json
-final case class JsObject(get: Map[String, Json]) extends Json final case class JsString(get: String) extends Json
-final case class JsNumber(get: Double) extends Json
-case object JsNull extends Json
-// The &quot;serialize to JSON&quot; behaviour is encoded in this trait
-trait JsonWriter[A] {
-  def write(value: A): Json
-}</code></p>
-<p>JsonWriter &#x662F;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#xFF0C;&#x901A;&#x8FC7;Json&#x548C;&#x5176;&#x5B50;&#x7C7B;&#x63D0;&#x4F9B;&#x652F;&#x6491;&#x4EE3;&#x7801;&#x3002;</p>
-<h3 id="112-&#x7C7B;&#x578B;&#x7C7B;&#x5B9E;&#x4F8B;">1.1.2 &#x7C7B;&#x578B;&#x7C7B;&#x5B9E;&#x4F8B;</h3>
-<p>&#x7C7B;&#x578B;&#x7C7B;&#x5B9E;&#x4F8B;&#x63D0;&#x4F9B;&#x4E86;&#x6211;&#x4EEC;&#x5173;&#x5FC3;&#x7684;&#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5305;&#x62EC;Scala&#x6807;&#x51C6;&#x5E93;&#x548C;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#x578B;&#x3002;
-&#x5728;Scala&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x5E26;&#x6709;implicit&#x5173;&#x952E;&#x5B57;&#x6807;&#x8BB0;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#x6765;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x7C7B;&#x7684;&#x5B9E;&#x5728;&#x7C7B;&#xFF1A;</p>
-<p><code>final case class Person(name: String, email: String)
-object JsonWriterInstances {
-  implicit val stringWriter: JsonWriter[String] =
-    new JsonWriter[String] {
-      def write(value: String): Json =
-        JsString(value)
-    }
-  implicit val personWriter: JsonWriter[Person] =
-    new JsonWriter[Person] {
-def write(value: Person): Json = JsObject(Map(
-&quot;name&quot; -&gt; JsString(value.name),
-&quot;email&quot; -&gt; JsString(value.email) ))
-}
-// etc...
-}</code></p>
-<h3 id="113-&#x7C7B;&#x578B;&#x7C7B;&#x63A5;&#x53E3;">1.1.3 &#x7C7B;&#x578B;&#x7C7B;&#x63A5;&#x53E3;</h3>
-<p>&#x7C7B;&#x578B;&#x7C7B;&#x63A5;&#x53E3;&#x662F;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x66B4;&#x9732;&#x7ED9;&#x7528;&#x6237;&#x7684;&#x4EFB;&#x4F55;&#x529F;&#x80FD;&#x3002;&#x63A5;&#x53E3;&#x662F;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x7C7B;&#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x9690;&#x5F0F;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x6709;&#x4E24;&#x79CD;&#x901A;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x63A5;&#x53E3;&#x5BF9;&#x8C61;&#x548C;&#x63A5;&#x53E3;&#x8BED;&#x6CD5;&#x3002;</p>
-<h4 id="&#x63A5;&#x53E3;&#x5BF9;&#x8C61;&#xFF08;interface-objects-&#xFF09;">&#x63A5;&#x53E3;&#x5BF9;&#x8C61;&#xFF08;Interface Objects &#xFF09;</h4>
-<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x5C06;&#x65B9;&#x6CD5;&#x653E;&#x5165;&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;&#xFF1A;
-<code>import JsonWriterInstances._
-Json.toJson(Person(&quot;Dave&quot;, &quot;dave@example.com&quot;))
-// res4: Json = JsObject(Map(name -&gt; JsString(Dave), email -&gt; JsString
-(dave@example.com)))</code></p>
-<p>&#x7F16;&#x8BD1;&#x5668;&#x5B9A;&#x4F4D;&#x5230;&#x6211;&#x4EEC;&#x8C03;&#x7528;&#x7684;toJson&#x65B9;&#x6CD5;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x9690;&#x5F0F;&#x53C2;&#x6570;&#x3002;&#x5B83;&#x5C31;&#x5F00;&#x59CB;&#x5C1D;&#x8BD5;&#x4FEE;&#x590D;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x641C;&#x7D22;&#x5230;&#x8FD9;&#x4E2A;&#x76F8;&#x5173;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#x5B9E;&#x4F8B;&#x5E76;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x5230;&#x8C03;&#x7528;&#x7684;&#x4F4D;&#x7F6E;&#xFF1A;</p>
-<p><code>son.toJson(Person(&quot;Dave&quot;, &quot;dave@example.com&quot;))(personWriter)</code></p>
-<h4 id="&#x63A5;&#x53E3;&#x8BED;&#x6CD5;&#xFF08;interface-syntax&#xFF09;">&#x63A5;&#x53E3;&#x8BED;&#x6CD5;&#xFF08;Interface Syntax&#xFF09;</h4>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x6765;&#x4F7F;&#x7528;&#x6269;&#x5C55;&#x65B9;&#x6CD5;&#x6765;&#x6269;&#x5C55;&#x5B58;&#x5728;&#x7684;&#x7C7B;&#x578B;&#x3002;Cats&#x5C06;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x79F0;&#x4E4B;&#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x7C7B;&#x7684;&#x201C;&#x8BED;&#x6CD5;&#xFF08;syntax&#xFF09;&#x201D;&#xFF1A;</p>
-<p><code>object JsonSyntax {
-  implicit class JsonWriterOps[A](value: A) {
-def toJson(implicit w: JsonWriter[A]): Json = w.write(value)
-} }</code>
-&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x5E76;&#x6392;import&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x4F8B;&#x6765;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x8BED;&#x6CD5;&#xFF1A;</p>
-<p><code>import JsonWriterInstances._
- import JsonSyntax._
-Person(&quot;Dave&quot;, &quot;dave@example.com&quot;).toJson
-// res6: Json = JsObject(Map(name -&gt; JsString(Dave), email -&gt; JsString
-(dave@example.com)))</code>
-&#x7F16;&#x8BD1;&#x5668;&#x518D;&#x6B21;&#x4E3A;&#x6211;&#x4EEC;&#x641C;&#x7D22;&#x9690;&#x5F0F;&#x53C2;&#x6570;&#x5E76;&#x4E14;&#x586B;&#x5145;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x4F4D;&#x7F6E;&#xFF1A;</p>
-<p><code>Person(&quot;Dave&quot;, &quot;dave@example.com&quot;).toJson(personWriter)</code></p>
-<h4 id="implicitly&#x65B9;&#x6CD5;">implicitly&#x65B9;&#x6CD5;</h4>
-<p>Scala&#x6807;&#x51C6;&#x5E93;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x901A;&#x7528;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#x63A5;&#x53E3;&#xFF0C;&#x53EB;&#x505A;implicitly&#x3002;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x53CA;&#x5176;&#x7B80;&#x5355;&#xFF1A;
-<code>def implicitly[A](implicit value: A): A =
-  value</code>
-&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;implicitly&#x51FD;&#x6570;&#x6765;&#x53EC;&#x5524;&#x9690;&#x5F0F;&#x57DF;&#x91CC;&#x9762;&#x7684;&#x4EFB;&#x610F;&#x503C;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x63D0;&#x4F9B;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;implicitly&#x51FD;&#x6570;&#x6765;&#x5B8C;&#x6210;&#x5269;&#x4E0B;&#x7684;&#x5DE5;&#x4F5C;&#xFF1A;
-<code>import JsonWriterInstances._ // import JsonWriterInstances._
-implicitly[JsonWriter[String]]
-// res8: JsonWriter[String] = JsonWriterInstances$$anon$1@a5a4735</code>
-Cats&#x4E2D;&#x5927;&#x90E8;&#x5206;&#x7C7B;&#x578B;&#x7C7B;&#x63D0;&#x4F9B;&#x4E86;&#x5176;&#x4ED6;&#x53EC;&#x5524;&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x7136;&#x800C;&#xFF0C; implicitly&#x5BF9;&#x4E8E;&#x8C03;&#x8BD5;&#x6765;&#x8BB2;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7528;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x6B63;&#x5E38;&#x7684;&#x4EE3;&#x7801;&#x6D41;&#x4E2D;&#x63D2;&#x5165;implicitly &#x8C03;&#x7528;&#x6765;&#x786E;&#x4FDD;&#x7F16;&#x8BD1;&#x5668;&#x80FD;&#x591F;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#xFF0C;&#x5E76;&#x4E14;&#x786E;&#x4FDD;&#x6CA1;&#x6709;&#x6A21;&#x68F1;&#x4E24;&#x53EF;&#x7684;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x9519;&#x8BEF;&#x3002;</p>
+                                <h2 id="13-&#x7EC3;&#x4E60;&#xFF1A;&#x53EF;&#x6253;&#x5370;&#x5E93;">1.3 &#x7EC3;&#x4E60;&#xFF1A;&#x53EF;&#x6253;&#x5370;&#x5E93;</h2>
+<p>Scala&#x63D0;&#x4F9B;&#x4E86;toString&#x65B9;&#x6CD5;&#x8BA9;&#x6211;&#x4EEC;&#x5C06;&#x4EFB;&#x610F;&#x503C;&#x8F6C;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5F15;&#x6765;&#x4E86;&#x4E00;&#x4E9B;&#x7F3A;&#x9677;&#xFF1A;&#x5B83;&#x9700;&#x8981;&#x5728;&#x9884;&#x8A00;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x79CD;&#x7C7B;&#x578B;&#x4E2D;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x8FD9;&#x5176;&#x4E2D;&#x8BB8;&#x591A;&#x5B9E;&#x73B0;&#x90FD;&#x4F1A;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x6709;&#x9650;&#x5236;&#xFF0C;&#x5E76;&#x4E14;&#x6211;&#x4EEC;&#x5E76;&#x6CA1;&#x6709;&#x9488;&#x5BF9;&#x7279;&#x6B8A;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x7279;&#x5316;&#x5B9E;&#x73B0;&#x7684;&#x9009;&#x62E9;&#x3002;
+&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E2A;&#x53EF;&#x6253;&#x5370;&#x7C7B;&#x578B;&#x7C7B;&#xFF1A;</p>
+<ol>
+<li>&#x5B9A;&#x4E49;&#x4E2A;&#x5305;&#x542B;&#x6709;format&#x65B9;&#x6CD5;&#x7684;&#x7C7B;&#x578B;&#x7C7B;&#x3002;format&#x5E94;&#x8BE5;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;A&#x7684;&#x503C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x3002;</li>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6709;String&#x548C;Int&#x7C7B;&#x578B;&#x7684;Printable&#x5B9E;&#x4F8B;&#x7684;PrintableInstances &#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x6CDB;&#x578B;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF1A;
+format&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;A&#x7684;&#x503C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x7C7B;&#x578B;&#x7684;Printable&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x5BF9;&#x5E94;&#x7684;Printable&#x6765;&#x5C06;A&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x3002;
+print&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x548C;format&#x76F8;&#x540C;&#xFF0C;&#x4F46;&#x662F;&#x8FD4;&#x56DE;&#x503C;&#x4E3A;Unit&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7528;println&#x5C06;A&#x8F6C;&#x5316;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x6253;&#x5370;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x3002;</li>
+</ol>
+<h4 id="&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;">&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E93;</h4>
+<p>&#x4E0A;&#x9762;&#x8FD9;&#x79CD;&#x5F62;&#x5F0F;&#x7684;&#x901A;&#x7528;&#x76EE;&#x7684;&#x6253;&#x5370;&#x5E93;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x5728;&#x591A;&#x79CD;&#x5E94;&#x7528;&#x4E2D;&#x3002;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9A;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x6765;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x65B0;&#x5E93;&#x3002;
+&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F1A;&#x5B9A;&#x4E49;&#x4E2A;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6765;&#x4EE3;&#x8868;&#x4F17;&#x6240;&#x5468;&#x77E5;&#x7684;&#x6709;&#x6BDB;&#x52A8;&#x7269;&#xFF1A;
+<code>final case class Cat(name: String, age: Int, color: String)</code>
+&#x4E0B;&#x4E00;&#x6B65;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F1A;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;Cat&#x7684;Printable&#x5B9E;&#x73B0;&#x4EE5;&#x4FBF;&#x4E8E;&#x6253;&#x5370;&#x51FA;&#x5982;&#x4E0B;&#x5F62;&#x5F0F;&#x7684;&#x5185;&#x5BB9;&#xFF1A;
+<code>NAME is a AGE year-old COLOR cat.</code>
+&#x6700;&#x7EC8;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x7C7B;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x6216;&#x8005;&#x4E00;&#x5C0F;&#x6BB5;app&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Cat&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x6253;&#x5370;&#x5230;&#x63A7;&#x5236;&#x53F0;&#xFF1A;
+<code>// Define a cat:
+val cat = Cat(/* ... */)</code></p>
+<h4 id="&#x66F4;&#x597D;&#x7684;&#x8BED;&#x6CD5;">&#x66F4;&#x597D;&#x7684;&#x8BED;&#x6CD5;</h4>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x5B9A;&#x4E49;&#x65B0;&#x7684;&#x6269;&#x5C55;&#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x66F4;&#x597D;&#x7684;&#x8BED;&#x6CD5;&#x6765;&#x662F;&#x7684;&#x8FD9;&#x4E2A;&#x6253;&#x5370;&#x5E93;&#x66F4;&#x52A0;&#x597D;&#x7528;&#xFF1A;</p>
+<ol>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EB;&#x505A;&#x7684;PrintableSyntax&#x5BF9;&#x8C61;&#xFF1B;</li>
+<li>&#x5728;&#x5BF9;&#x8C61;Inside PrintableSyntax&#x5185;&#x90E8;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7C7B;PrintableOps[A]&#x7528;&#x6765;&#x5305;&#x88F9;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;A&#x7684;&#x503C;&#xFF1B;</li>
+<li>&#x5728;PrintableOps&#x4E2D;&#x5B9A;&#x4E49;&#x4E0B;&#x9762;&#x65B9;&#x6CD5;&#xFF1A;<ul>
+<li>format&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x9690;&#x5F0F;Printable[A]&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x8868;&#x793A;&#x5305;&#x88F9;A&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF1B;</li>
+<li>print&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x9690;&#x5F0F;Printable[A]&#x5E76;&#x4E14;&#x8FD4;&#x56DE;Unit&#xFF0C;&#x5176;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x5C06;A&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5F62;&#x5F0F;&#x6253;&#x5370;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x3002;</li>
+</ul>
+</li>
+<li>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x6269;&#x5C55;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x6253;&#x5370;&#x4E0A;&#x8FF0;&#x7684;&#x7EC3;&#x4E60;&#xFF1B;</li>
+</ol>
 
                                 
                                 </section>
@@ -789,12 +755,12 @@ Cats&#x4E2D;&#x5927;&#x90E8;&#x5206;&#x7C7B;&#x578B;&#x7C7B;&#x63D0;&#x4F9B;&#x4
 
             
                 
-                <a href="../chapter01.html" class="navigation navigation-prev " aria-label="Previous page: 第1章 介绍">
+                <a href="section02.html" class="navigation navigation-prev " aria-label="Previous page: 第2节 与隐式转换一起工作">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="section02.html" class="navigation navigation-next " aria-label="Next page: 第2节 与隐式转换一起工作">
+                <a href="section04.html" class="navigation navigation-next " aria-label="Next page: 第4节 遇见Cats">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -805,7 +771,7 @@ Cats&#x4E2D;&#x5927;&#x90E8;&#x5206;&#x7C7B;&#x578B;&#x7C7B;&#x63D0;&#x4F9B;&#x4
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第1节 类型类的结构","level":"1.3.1.1","depth":3,"next":{"title":"第2节 与隐式转换一起工作","level":"1.3.1.2","depth":3,"path":"part01/chapter01/section02.md","ref":"part01/chapter01/section02.md","articles":[]},"previous":{"title":"第1章 介绍","level":"1.3.1","depth":2,"path":"part01/chapter01.md","ref":"part01/chapter01.md","articles":[{"title":"第1节 类型类的结构","level":"1.3.1.1","depth":3,"path":"part01/chapter01/section01.md","ref":"part01/chapter01/section01.md","articles":[]},{"title":"第2节 与隐式转换一起工作","level":"1.3.1.2","depth":3,"path":"part01/chapter01/section02.md","ref":"part01/chapter01/section02.md","articles":[]},{"title":"第3节 练习：可打印库","level":"1.3.1.3","depth":3,"path":"part01/chapter01/section03.md","ref":"part01/chapter01/section03.md","articles":[]},{"title":"第4节 遇见Cats","level":"1.3.1.4","depth":3,"path":"part01/chapter01/section04.md","ref":"part01/chapter01/section04.md","articles":[]},{"title":"第5节 例子：Eq","level":"1.3.1.5","depth":3,"path":"part01/chapter01/section05.md","ref":"part01/chapter01/section05.md","articles":[]},{"title":"第6节 控制实例选择","level":"1.3.1.6","depth":3,"path":"part01/chapter01/section06.md","ref":"part01/chapter01/section06.md","articles":[]},{"title":"第7节 小结","level":"1.3.1.7","depth":3,"path":"part01/chapter01/section07.md","ref":"part01/chapter01/section07.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part01/chapter01/section01.md","mtime":"2020-01-23T04:52:55.311Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-27T10:49:45.691Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第3节 练习：可打印库","level":"1.3.1.3","depth":3,"next":{"title":"第4节 遇见Cats","level":"1.3.1.4","depth":3,"path":"part01/chapter01/section04.md","ref":"part01/chapter01/section04.md","articles":[]},"previous":{"title":"第2节 与隐式转换一起工作","level":"1.3.1.2","depth":3,"path":"part01/chapter01/section02.md","ref":"part01/chapter01/section02.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part01/chapter01/section03.md","mtime":"2020-01-23T04:53:08.299Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-27T10:49:45.691Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
