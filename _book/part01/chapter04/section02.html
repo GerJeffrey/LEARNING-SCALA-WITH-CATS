@@ -530,7 +530,7 @@
                 <a href="section03.html">
             
                     
-                    第3节 Functor的定义
+                    第3节 幺元Monad
             
                 </a>
             
@@ -543,7 +543,7 @@
                 <a href="section04.html">
             
                     
-                    第4节 高级类型和类型构造器
+                    第4节 Either
             
                 </a>
             
@@ -556,7 +556,7 @@
                 <a href="section05.html">
             
                     
-                    第5节 Cats中的Functor
+                    第5节 另外一面:错误处理和MonadError
             
                 </a>
             
@@ -713,6 +713,59 @@ val list2 = Monad[List].flatMap(List(1,2,3))(a=&gt;List(a, a * 10)
 val list3 = Monad[List].map(list2)(a =&gt; a + 123)`</p>
 <p>Monad&#x63D0;&#x4F9B;&#x4E86;&#x8BB8;&#x591A;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#xFF0C;&#x5305;&#x62EC;functor&#x7684;&#x6240;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;scaladoc&#x83B7;&#x53D6;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</p>
 <h3 id="422-&#x9ED8;&#x8BA4;&#x5B9E;&#x4F8B;">4.2.2 &#x9ED8;&#x8BA4;&#x5B9E;&#x4F8B;</h3>
+<p>Cats&#x901A;&#x8FC7;cats.instances&#x4E3A;&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x6240;&#x6709;monad&#x90FD;&#x63D0;&#x4F9B;&#x4E86;&#x5B9E;&#x4F8B;(Option,List,Vector&#x7B49;&#x7B49;)&#xFF1A;</p>
+<p>`import cats.instances.option._</p>
+<p>Monad[Option].flatMap(OPtion(1))(a =&gt; Option(a * 2))</p>
+<p>import cats.instances.list._</p>
+<p>Monad[List].flatMap(List(1,2,3))(a =&gt; List(a, a * 10))</p>
+<p>import cats.instances.vector._</p>
+<p>Monad[Vector].flatMap(Vector(1,2,3))(a =&gt; Vector(a, a * 10))`</p>
+<p>Cats&#x4E5F;&#x4E3A;Future&#x63D0;&#x4F9B;&#x4E86;Monad&#x3002;&#x4E0D;&#x60F3;Future&#x7C7B;&#x578B;&#x81EA;&#x8EAB;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;monad&#x7684;pure&#x548C;flatMap&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x63A5;&#x6536;&#x9690;&#x5F0F;ExcecutionContext&#x53C2;&#x6570;(&#x56E0;&#x4E3A;&#x53C2;&#x6570;&#x5E76;&#x975E;Monad&#x7279;&#x8D28;&#x7684;&#x53C2;&#x6570;&#x7684;&#x4E00;&#x90E8;&#x5206;)&#x3002;&#x4E3A;&#x4E86;&#x53D8;&#x901A;&#xFF0C;Cats&#x9700;&#x8981;&#x6211;&#x4EEC;&#x5728;&#x8C03;&#x7528;Future&#x7684;Monad&#x7684;&#x65F6;&#x5019;&#xFF0C;ExecutionContext&#x9700;&#x8981;&#x5728;&#x4F5C;&#x7528;&#x57DF;&#x5185;&#xFF1A;</p>
+<p>`import cats.instances.future.<em>
+import scala.concurrent.</em>
+import scala.concurrent.duration._</p>
+<p>val fm = Monad[Future]`</p>
+<p>&#x5C06;ExcutionContext&#x5F15;&#x5165;&#x4F5C;&#x7528;&#x57DF;&#x53EF;&#x4EE5;&#x4FEE;&#x590D;&#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x65F6;&#x7684;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF1A;</p>
+<p>`import scala.concurrent.ExecutionContext.Implicits.global</p>
+<p>val fm = Monoad[Future]`</p>
+<p>Monad&#x5B9E;&#x4F8B;&#x4F7F;&#x7528;&#x88AB;&#x6355;&#x83B7;&#x7684;ExecutionContext&#x66FF;&#x6362;&#x8C03;&#x7528;pure&#x548C;flatMap&#xFF1A;</p>
+<p>`val future = fm.flatMap(fm.pure(1))(x =&gt; fm.pure(x + 1))</p>
+<p>Await.result(future, 1.second)`</p>
+<p>&#x53E6;&#x5916;&#xFF0C;Cats&#x63D0;&#x4F9B;&#x4E86;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x5728;&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x63D0;&#x4F9B;&#x7684;&#x65B0;monad&#x3002;&#x540E;&#x9762;&#x6211;&#x4EEC;&#x4F1A;&#x719F;&#x6089;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x3002;</p>
+<h3 id="423-monad-syntax">4.2.3 Monad syntax</h3>
+<p>monad&#x7684;syntax&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E09;&#x4E2A;&#x65B9;&#x9762;&#x6765;&#x8BB2;&#xFF1A;</p>
+<ul>
+<li>cats.syntax.flatMap&#x63D0;&#x4F9B;&#x4E86;flatMap&#x7684;syntax&#xFF1B;</li>
+<li>cats.syntax.functor&#x63D0;&#x4F9B;&#x4E86;map&#x7684;syntax&#xFF1B;</li>
+<li>cats.syntax.applicative&#x63D0;&#x4F9B;&#x4E86;pure&#x7684;syntax;</li>
+</ul>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5BFC;&#x5165;cats.implicits&#x5C06;&#x6240;&#x9700;&#x8981;&#x7684;&#x6240;&#x6709;&#x4E1C;&#x897F;&#x5168;&#x90E8;&#x5BFC;&#x5165;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x4E3A;&#x4E86;&#x6E05;&#x6670;&#x7684;&#x8BF4;&#x660E;&#xFF0C;&#x6211;&#x4EEC;&#x5206;&#x5F00;&#x6765;&#x5BFC;&#x5165;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4F7F;&#x7528;pure&#x6765;&#x6784;&#x5EFA;monad&#x5B9E;&#x4F8B;&#x3002;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x6765;&#x533A;&#x5206;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#x7279;&#x6B8A;&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<p>`import cats.instances.option.<em>
+import cats.instances.list.</em>
+import cats.syntax.applicative._</p>
+<p>1.pure[Option]
+1.pure[List]`</p>
+<p>&#x50CF;Option&#x548C;List&#x4E00;&#x6837;&#x6765;&#x76F4;&#x63A5;&#x5728;Scala monad&#x4E0A;&#x5C55;&#x793A;flatMap&#x548C;map&#x65B9;&#x6CD5;&#x662F;&#x6BD4;&#x8F83;&#x56F0;&#x96BE;&#x7684;&#xFF0C; &#x56E0;&#x4E3A;&#x4ED6;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;&#x81EA;&#x5DF1;&#x7684;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x7684;&#x663E;&#x5F0F;&#x7248;&#x672C;&#x3002;&#x6211;&#x4EEC;&#x4F1A;&#x5199;&#x4E00;&#x4E2A;&#x6CDB;&#x5316;&#x51FD;&#x6570;&#x6765;&#x6267;&#x884C;&#x5305;&#x88F9;&#x5728;&#x7528;&#x6237;&#x9009;&#x62E9;&#x7684;monad&#x4E2D;&#x7684;&#x53C2;&#x6570;&#x8BA1;&#x7B97;&#xFF1A;</p>
+<p>`import cats.Monad
+import cats.syntax.functor.<em>
+import cats.syntax.flatMap.</em>
+import scala.language.higherKinds</p>
+<p>def sumSquare<a href="a: F[Int], b:F[Int]" target="_blank">F[_]: Monad</a>: F[Int]  = a.flatMap(x =&gt; b.map(y =&gt; x<em>x + y</em>y))</p>
+<p>import cats.instances.option.<em>
+import cats.instances.list.</em></p>
+<p>sumSquare(Option(3),Option(4))</p>
+<p>sumSquare(List(1,2,3), List(4, 5))
+`</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;for comprehension&#x6765;&#x91CD;&#x5199;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x5728;&#x91CD;&#x65B0;flatMap&#x548C;map&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x6211;&#x4EEC;&#x7684;Monad&#x6765;&#x63D2;&#x5165;&#x6B63;&#x786E;&#x7684;&#x9690;&#x5F0F;&#x8F6C;&#x6362;</p>
+<p>`def sumSquare<a href="a: F[Int], b:F[Int]" target="_blank">F[_]: Monad</a>:F[Int] =</p>
+<p>for{
+  x &lt;- a
+  y &lt;- b
+  } yield x<em>x + y</em>y</p>
+<p>sumSquare(Option(3), Option(4))
+sumSquare(List(1,2,3),List(4,5))`</p>
+<p>&#x8FD9;&#x6216;&#x591A;&#x6216;&#x5C11;&#x8BA9;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x5173;&#x4E8E;Cats&#x4E2D;&#x7684;monad&#x3002;&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x67D0;&#x4E9B;&#x5728;&#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x6709;&#x7528;&#x7684;monad&#x5B9E;&#x4F8B;&#x3002;</p>
 <p>#</p>
 
                                 
@@ -746,7 +799,7 @@ val list3 = Monad[List].map(list2)(a =&gt; a + 123)`</p>
                 </a>
                 
                 
-                <a href="section03.html" class="navigation navigation-next " aria-label="Next page: 第3节 Functor的定义">
+                <a href="section03.html" class="navigation navigation-next " aria-label="Next page: 第3节 幺元Monad">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -757,7 +810,7 @@ val list3 = Monad[List].map(list2)(a =&gt; a + 123)`</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第2节 Cats中的Monad","level":"1.3.4.2","depth":3,"next":{"title":"第3节 Functor的定义","level":"1.3.4.3","depth":3,"path":"part01/chapter04/section03.md","ref":"part01/chapter04/section03.md","articles":[]},"previous":{"title":"第1节 什么是Monad Functors","level":"1.3.4.1","depth":3,"path":"part01/chapter04/section01.md","ref":"part01/chapter04/section01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part01/chapter04/section02.md","mtime":"2020-02-27T10:49:35.299Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-27T10:49:45.691Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"第2节 Cats中的Monad","level":"1.3.4.2","depth":3,"next":{"title":"第3节 幺元Monad","level":"1.3.4.3","depth":3,"path":"part01/chapter04/section03.md","ref":"part01/chapter04/section03.md","articles":[]},"previous":{"title":"第1节 什么是Monad Functors","level":"1.3.4.1","depth":3,"path":"part01/chapter04/section01.md","ref":"part01/chapter04/section01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part01/chapter04/section02.md","mtime":"2020-02-28T05:48:45.200Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-04T05:03:13.531Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
